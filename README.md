@@ -1,4 +1,4 @@
-# Nrwl railways Angular edition
+# Nrwl Railways Angular edition
 
 A sample [Nx](https://nx.dev/) workspace generated using the Nx Angular
 workspace preset meant to show off workspace structure and configuration.
