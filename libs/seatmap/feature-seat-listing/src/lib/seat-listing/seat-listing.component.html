@@ -1,0 +1,8 @@
+<p>Today is {{ today }}</p>
+
+<nx-nrwl-starter-confirm-button
+  message="Do you confirm checking in at this seat?"
+  (confirmed)="onSeatConfirmed($event)"
+>
+  Check in
+</nx-nrwl-starter-confirm-button>

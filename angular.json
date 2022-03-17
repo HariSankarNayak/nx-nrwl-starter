@@ -1,0 +1,987 @@
+{
+  "version": 1,
+  "projects": {
+    "booking-data-access": {
+      "projectType": "library",
+      "root": "libs/booking/data-access",
+      "sourceRoot": "libs/booking/data-access/src",
+      "prefix": "nx-nrwl-starter",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/booking/data-access/src/**/*.ts",
+              "libs/booking/data-access/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/booking/data-access"
+          ],
+          "options": {
+            "jestConfig": "libs/booking/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "booking-desktop-app": {
+      "projectType": "application",
+      "root": "apps/booking/desktop-app",
+      "sourceRoot": "apps/booking/desktop-app/src",
+      "prefix": "booking",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/booking/desktop-app",
+            "index": "apps/booking/desktop-app/src/index.html",
+            "main": "apps/booking/desktop-app/src/main.ts",
+            "polyfills": "apps/booking/desktop-app/src/polyfills.ts",
+            "tsConfig": "apps/booking/desktop-app/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              {
+                "glob": "favicon.ico",
+                "input": "libs/shared/root/assets/src",
+                "output": "./"
+              },
+              {
+                "glob": "**/*",
+                "input": "libs/shared/root/assets/src/assets",
+                "output": "assets"
+              }
+            ],
+            "styles": [
+              "libs/shared/root/styles/src/index.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "libs/shared/root/environments/src/lib/environment.ts",
+                  "with": "libs/shared/root/environments/src/lib/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "booking-desktop-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "booking-desktop-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "booking-desktop-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/booking/desktop-app/src/**/*.ts",
+              "apps/booking/desktop-app/src/**/*.html"
+            ]
+          }
+        },
+        "lint-styles": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "pnpx stylelint apps/booking/desktop-app/src/**/*.scss"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/booking/desktop-app"
+          ],
+          "options": {
+            "jestConfig": "apps/booking/desktop-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "booking-desktop-app-e2e": {
+      "root": "apps/booking/desktop-app-e2e",
+      "sourceRoot": "apps/booking/desktop-app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/booking/desktop-app-e2e/cypress.json",
+            "tsConfig": "apps/booking/desktop-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "booking-desktop-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "booking-desktop-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/booking/desktop-app-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "booking-feature-train-search": {
+      "projectType": "library",
+      "root": "libs/booking/feature-train-search",
+      "sourceRoot": "libs/booking/feature-train-search/src",
+      "prefix": "booking",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/booking/feature-train-search/src/**/*.ts",
+              "libs/booking/feature-train-search/src/**/*.html"
+            ]
+          }
+        },
+        "lint-styles": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "pnpx stylelint libs/booking/feature-train-search/src/**/*.scss"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/booking/feature-train-search"
+          ],
+          "options": {
+            "jestConfig": "libs/booking/feature-train-search/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "booking-feature-passenger-info": {
+      "projectType": "library",
+      "root": "libs/booking/feature-passenger-info",
+      "sourceRoot": "libs/booking/feature-passenger-info/src",
+      "prefix": "booking",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/booking/feature-passenger-info/src/**/*.ts",
+              "libs/booking/feature-passenger-info/src/**/*.html"
+            ]
+          }
+        },
+        "lint-styles": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "pnpx stylelint libs/booking/feature-passenger-info/src/**/*.scss"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/booking/feature-passenger-info"
+          ],
+          "options": {
+            "jestConfig": "libs/booking/feature-passenger-info/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "booking-mobile-app": {
+      "projectType": "application",
+      "root": "apps/booking/mobile-app",
+      "sourceRoot": "apps/booking/mobile-app/src",
+      "prefix": "booking",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/booking/mobile-app",
+            "index": "apps/booking/mobile-app/src/index.html",
+            "main": "apps/booking/mobile-app/src/main.ts",
+            "polyfills": "apps/booking/mobile-app/src/polyfills.ts",
+            "tsConfig": "apps/booking/mobile-app/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              {
+                "glob": "favicon.ico",
+                "input": "libs/shared/root/assets/src",
+                "output": "./"
+              },
+              {
+                "glob": "**/*",
+                "input": "libs/shared/root/assets/src/assets",
+                "output": "assets"
+              }
+            ],
+            "styles": [
+              "libs/shared/root/styles/src/index.scss"
+            ],
+            "scripts": [],
+            "fileReplacements": [
+              {
+                "replace": "libs/shared/root/environments/src/lib/environment.ts",
+                "with": "libs/shared/root/environments/src/lib/environment.mobile.ts"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "libs/shared/root/environments/src/lib/environment.ts",
+                  "with": "libs/shared/root/environments/src/lib/environment.mobile.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "booking-mobile-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "booking-mobile-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "booking-mobile-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/booking/mobile-app/src/**/*.ts",
+              "apps/booking/mobile-app/src/**/*.html"
+            ]
+          }
+        },
+        "lint-styles": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "pnpx stylelint apps/booking/mobile-app/src/**/*.scss"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/booking/mobile-app"
+          ],
+          "options": {
+            "jestConfig": "apps/booking/mobile-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "booking-mobile-app-e2e": {
+      "root": "apps/booking/mobile-app-e2e",
+      "sourceRoot": "apps/booking/mobile-app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/booking/mobile-app-e2e/cypress.json",
+            "tsConfig": "apps/booking/mobile-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "booking-mobile-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "booking-mobile-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/booking/mobile-app-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "booking-root-feature-shell": {
+      "projectType": "library",
+      "root": "libs/booking/root/feature-shell",
+      "sourceRoot": "libs/booking/root/feature-shell/src",
+      "prefix": "booking",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/booking/root/feature-shell/src/**/*.ts",
+              "libs/booking/root/feature-shell/src/**/*.html"
+            ]
+          }
+        },
+        "lint-styles": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "pnpx stylelint libs/booking/root/feature-shell/src/**/*.scss"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/booking/root/feature-shell"
+          ],
+          "options": {
+            "jestConfig": "libs/booking/root/feature-shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "check-in-data-access": {
+      "projectType": "library",
+      "root": "libs/check-in/data-access",
+      "sourceRoot": "libs/check-in/data-access/src",
+      "prefix": "nx-nrwl-starter",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/check-in/data-access/src/**/*.ts",
+              "libs/check-in/data-access/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/check-in/data-access"
+          ],
+          "options": {
+            "jestConfig": "libs/check-in/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "check-in-desktop-app": {
+      "projectType": "application",
+      "root": "apps/check-in/desktop-app",
+      "sourceRoot": "apps/check-in/desktop-app/src",
+      "prefix": "check-in",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/check-in/desktop-app",
+            "index": "apps/check-in/desktop-app/src/index.html",
+            "main": "apps/check-in/desktop-app/src/main.ts",
+            "polyfills": "apps/check-in/desktop-app/src/polyfills.ts",
+            "tsConfig": "apps/check-in/desktop-app/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              {
+                "glob": "favicon.ico",
+                "input": "libs/shared/root/assets/src",
+                "output": "./"
+              },
+              {
+                "glob": "**/*",
+                "input": "libs/shared/root/assets/src/assets",
+                "output": "assets"
+              }
+            ],
+            "styles": [
+              "libs/shared/root/styles/src/index.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "libs/shared/root/environments/src/lib/environment.ts",
+                  "with": "libs/shared/root/environments/src/lib/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "check-in-desktop-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "check-in-desktop-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "check-in-desktop-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/check-in/desktop-app/src/**/*.ts",
+              "apps/check-in/desktop-app/src/**/*.html"
+            ]
+          }
+        },
+        "lint-styles": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "pnpx stylelint apps/check-in/desktop-app/src/**/*.scss"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/check-in/desktop-app"
+          ],
+          "options": {
+            "jestConfig": "apps/check-in/desktop-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "check-in-desktop-app-e2e": {
+      "root": "apps/check-in/desktop-app-e2e",
+      "sourceRoot": "apps/check-in/desktop-app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/check-in/desktop-app-e2e/cypress.json",
+            "tsConfig": "apps/check-in/desktop-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "check-in-desktop-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "check-in-desktop-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/check-in/desktop-app-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "check-in-mobile-app": {
+      "projectType": "application",
+      "root": "apps/check-in/mobile-app",
+      "sourceRoot": "apps/check-in/mobile-app/src",
+      "prefix": "check-in",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/check-in/mobile-app",
+            "index": "apps/check-in/mobile-app/src/index.html",
+            "main": "apps/check-in/mobile-app/src/main.ts",
+            "polyfills": "apps/check-in/mobile-app/src/polyfills.ts",
+            "tsConfig": "apps/check-in/mobile-app/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              {
+                "glob": "favicon.ico",
+                "input": "libs/shared/root/assets/src",
+                "output": "./"
+              },
+              {
+                "glob": "**/*",
+                "input": "libs/shared/root/assets/src/assets",
+                "output": "assets"
+              }
+            ],
+            "styles": [
+              "libs/shared/root/styles/src/index.scss"
+            ],
+            "scripts": [],
+            "fileReplacements": [
+              {
+                "replace": "libs/shared/root/environments/src/lib/environment.ts",
+                "with": "libs/shared/root/environments/src/lib/environment.mobile.ts"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "libs/shared/root/environments/src/lib/environment.ts",
+                  "with": "libs/shared/root/environments/src/lib/environment.mobile.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "check-in-mobile-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "check-in-mobile-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "check-in-mobile-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/check-in/mobile-app/src/**/*.ts",
+              "apps/check-in/mobile-app/src/**/*.html"
+            ]
+          }
+        },
+        "lint-styles": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "pnpx stylelint apps/check-in/mobile-app/src/**/*.scss"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/apps/check-in/mobile-app"
+          ],
+          "options": {
+            "jestConfig": "apps/check-in/mobile-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "check-in-mobile-app-e2e": {
+      "root": "apps/check-in/mobile-app-e2e",
+      "sourceRoot": "apps/check-in/mobile-app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/check-in/mobile-app-e2e/cypress.json",
+            "tsConfig": "apps/check-in/mobile-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "check-in-mobile-app:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "check-in-mobile-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/check-in/mobile-app-e2e/**/*.{js,ts}"
+            ]
+          }
+        }
+      }
+    },
+    "check-in-root-feature-shell": {
+      "projectType": "library",
+      "root": "libs/check-in/root/feature-shell",
+      "sourceRoot": "libs/check-in/root/feature-shell/src",
+      "prefix": "check-in",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/check-in/root/feature-shell/src/**/*.ts",
+              "libs/check-in/root/feature-shell/src/**/*.html"
+            ]
+          }
+        },
+        "lint-styles": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "pnpx stylelint libs/check-in/root/feature-shell/src/**/*.scss"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/check-in/root/feature-shell"
+          ],
+          "options": {
+            "jestConfig": "libs/check-in/root/feature-shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "seatmap-data-access": {
+      "projectType": "library",
+      "root": "libs/seatmap/data-access",
+      "sourceRoot": "libs/seatmap/data-access/src",
+      "prefix": "nx-nrwl-starter",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/seatmap/data-access/src/**/*.ts",
+              "libs/seatmap/data-access/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/seatmap/data-access"
+          ],
+          "options": {
+            "jestConfig": "libs/seatmap/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "seatmap-feature-seat-listing": {
+      "projectType": "library",
+      "root": "libs/seatmap/feature-seat-listing",
+      "sourceRoot": "libs/seatmap/feature-seat-listing/src",
+      "prefix": "seatmap",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/seatmap/feature-seat-listing/src/**/*.ts",
+              "libs/seatmap/feature-seat-listing/src/**/*.html"
+            ]
+          }
+        },
+        "lint-styles": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "pnpx stylelint libs/seatmap/feature-seat-listing/src/**/*.scss"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/seatmap/feature-seat-listing"
+          ],
+          "options": {
+            "jestConfig": "libs/seatmap/feature-seat-listing/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-root-assets": {
+      "projectType": "library",
+      "root": "libs/shared/root/assets",
+      "sourceRoot": "libs/shared/root/assets/src",
+      "architect": {}
+    },
+    "shared-root-data-access": {
+      "projectType": "library",
+      "root": "libs/shared/root/data-access",
+      "sourceRoot": "libs/shared/root/data-access/src",
+      "prefix": "nx-nrwl-starter",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/root/data-access/src/**/*.ts",
+              "libs/shared/root/data-access/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/root/data-access"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/root/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-root-environments": {
+      "projectType": "library",
+      "root": "libs/shared/root/environments",
+      "sourceRoot": "libs/shared/root/environments/src",
+      "prefix": "nx-nrwl-starter",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/root/environments/src/**/*.ts",
+              "libs/shared/root/environments/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/root/environments"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/root/environments/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-root-styles": {
+      "projectType": "library",
+      "root": "libs/shared/root/styles",
+      "sourceRoot": "libs/shared/root/styles/src",
+      "architect": {
+        "lint-styles": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "pnpx stylelint libs/shared/root/styles/src/**/*.scss"
+          }
+        }
+      }
+    },
+    "shared-ui-buttons": {
+      "projectType": "library",
+      "root": "libs/shared/ui-buttons",
+      "sourceRoot": "libs/shared/ui-buttons/src",
+      "prefix": "nx-nrwl-starter",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/ui-buttons/src/**/*.ts",
+              "libs/shared/ui-buttons/src/**/*.html"
+            ]
+          }
+        },
+        "lint-styles": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "pnpx stylelint libs/shared/ui-buttons/src/**/*.scss"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/ui-buttons"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/ui-buttons/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-util-formatting": {
+      "projectType": "library",
+      "root": "libs/shared/util-formatting",
+      "sourceRoot": "libs/shared/util-formatting/src",
+      "prefix": "nx-nrwl-starter",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/util-formatting/src/**/*.ts",
+              "libs/shared/util-formatting/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/util-formatting"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/util-formatting/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "workspace-tools": {
+      "projectType": "tool",
+      "root": "tools",
+      "sourceRoot": "tools",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "tools/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/tools"
+          ],
+          "options": {
+            "jestConfig": "tools/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular",
+    "packageManager": "pnpm",
+    "analytics": false
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "e2eTestRunner": "cypress",
+      "linter": "eslint",
+      "routing": false,
+      "strict": true,
+      "style": "scss",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "displayBlock": true,
+      "skipTests": true,
+      "style": "scss"
+    },
+    "@nrwl/angular:library": {
+      "linter": "eslint",
+      "strict": true,
+      "style": "scss",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:storybook-configuration": {
+      "linter": "eslint"
+    }
+  },
+  "defaultProject": "booking-desktop-app"
+}

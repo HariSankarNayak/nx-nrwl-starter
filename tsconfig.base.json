@@ -1,0 +1,57 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@nx-nrwl-starter/booking/data-access": [
+        "libs/booking/data-access/src/index.ts"
+      ],
+      "@nx-nrwl-starter/shared/root/data-access": [
+        "libs/shared/root/data-access/src/index.ts"
+      ],
+      "@nx-nrwl-starter/shared/root/environments": [
+        "libs/shared/root/environments/src/index.ts"
+      ],
+      "@nx-nrwl-starter/booking/feature-passenger-info": [
+        "libs/booking/feature-passenger-info/src/index.ts"
+      ],
+      "@nx-nrwl-starter/booking/feature-train-search": [
+        "libs/booking/feature-train-search/src/index.ts"
+      ],
+      "@nx-nrwl-starter/check-in/data-access": [
+        "libs/check-in/data-access/src/index.ts"
+      ],
+      "@nx-nrwl-starter/shared/ui-buttons": [
+        "libs/shared/ui-buttons/src/index.ts"
+      ],
+      "@nx-nrwl-starter/shared/util-formatting": [
+        "libs/shared/util-formatting/src/index.ts"
+      ],
+      "@nx-nrwl-starter/seatmap/feature-seat-listing": [
+        "libs/seatmap/feature-seat-listing/src/index.ts"
+      ],
+      "@nx-nrwl-starter/seatmap/data-access": [
+        "libs/seatmap/data-access/src/index.ts"
+      ],
+      "@nx-nrwl-starter/booking/root/feature-shell": [
+        "libs/booking/root/feature-shell/src/index.ts"
+      ],
+      "@nx-nrwl-starter/check-in/root/feature-shell": [
+        "libs/check-in/root/feature-shell/src/index.ts"
+      ]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
